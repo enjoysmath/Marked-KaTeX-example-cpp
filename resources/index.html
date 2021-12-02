@@ -15,35 +15,37 @@
   <script>
   'use strict';
 
-  var placeholder = document.getElementById('placeholder');
+  document.addEventListener("DOMContentLoaded", function() {
+      var placeholder = document.getElementById('placeholder');
 
-  var updateText = function(text) {
-      placeholder.innerHTML = marked(text);
-  }
+      var renderMath = function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+      }
 
-  new QWebChannel(qt.webChannelTransport,
-    function(channel) {
-      var content = channel.objects.content;
-      updateText(content.text);
-      content.textChanged.connect(updateText);
-    }
-  );
-  </script>
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          renderMathInElement(document.body, {
-            // customised options
-            // • auto-render specific keys, e.g.:
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '\\[', right: '\\]', display: true}
-            ],
-            // • rendering keys, e.g.:
-            throwOnError : false
-          });
-      });
+      var updateText = function(text) {
+          placeholder.innerHTML = marked(text);
+          renderMath();
+      }
+
+      new QWebChannel(qt.webChannelTransport,
+        function(channel) {
+          var content = channel.objects.content;
+          updateText(content.text);
+          content.textChanged.connect(updateText);
+        }
+      );
+   });
   </script>
 </body>
 </html>
