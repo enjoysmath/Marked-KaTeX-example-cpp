@@ -1,0 +1,10 @@
+﻿  Generate moc_predefs.h
+  document.cpp
+  main.cpp
+  mainwindow.cpp
+  previewpage.cpp
+  qrc_markdowneditor.cpp
+  moc_document.cpp
+  moc_mainwindow.cpp
+  moc_previewpage.cpp
+  Marked-KaTeX-example-cpp.vcxproj -> C:\Users\fruit\OneDrive\Desktop\DiagramChaser\Marked-KaTeX-example-cpp\release\Marked-KaTeX-example-cpp.exe
